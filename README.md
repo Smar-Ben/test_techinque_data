@@ -33,16 +33,17 @@ Construire un pipeline de données robuste pour ingérer, transformer et mettre 
 
 - **Authentification** : API key stockée dans Secret Manager (sur GCP)
 - **Pagination automatique** : Gestion des limites API (max 250 items/page)
-- **Génération de fichiers uniques** : `{endpoint}_{YYYYMMDD_HHmm}_{uuid}.json`
-- **Retry policy** : 3 tentatives avec exponential backoff
+- **Génération de fichiers uniques** : `{service}_{endpoint}_{YYYYMMDD_HHmm}_{uuid}.json`
+- **Retry policy** : 3 tentatives via airflow
 - **Idempotence** : Reprise granulaire par page avec checkpoint (évite le retraitement complet en cas d'échec)
 - **Traitement asynchrone** : Pagination non-bloquante pour optimiser les performances
 - **Initialisation dynamique** : Récupération de la date de départ depuis BigQuery pour éviter les doublons
 
 ### Arguments du Cloud Run Job
 
+--service: Nom du service métier à traiter (exemple: retail, ecommerce, pos)
 --endpoint : Endpoint à traiter (sales/products/customers)
---start_sales_id : Date optionnelle au format YYYY-MM-DD (par défaut : date courante)
+--start_sales : Date optionnelle au format YYYY-MM-DD (par défaut : date courante)
 
 ### Stratégies par endpoint
 
@@ -179,7 +180,7 @@ CREATE TABLE dmt.sales_items (
 
 ### Optimisations BigQuery
 
-- **Ajout du clustering**: Voir selon nos besoin, mais le clustering peut être utile pour améliorer la performance de nos requêtes
+- **Ajout du clustering**: Voir selon nos besoin, mais le clustering peut être utile pour améliorer la performance de nos requêtes (sur customerid ou productsku)
 - **Ajout des description**: Ajouter les description sur nos tables pour avoir maximumn d'info
 - **Ajout de contrainte**: On peut ajouter les primary key et foreign key sur nos tables pour améliorer les jointure
 

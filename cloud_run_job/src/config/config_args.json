@@ -1,0 +1,25 @@
+[
+    {
+        "name": "service",
+        "help": "Service name",
+        "required": true,
+        "choices": [
+            "retail"
+        ]
+    },
+    {
+        "name": "endpoint",
+        "help": "API endpoint to process",
+        "required": true,
+        "choices": [
+            "sales",
+            "products", 
+            "customers"
+        ]
+    },
+    {
+        "name": "start_date",
+        "help": "Start date for getting the transactions (format: YYYY-MM-DD)",
+        "required": false
+    }
+]
