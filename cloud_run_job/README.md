@@ -55,3 +55,18 @@ uv run  src/main.py --service retail --endpoint sales --start_date 2024-07-01
 ## 🧪 Tests
 
 Les tests seront ajoutés dans le dossier test/. Les appels aux API et à GCS sont mockés, ce qui permet une exécution locale sans connexion aux services externes.
+
+## 🧠 Améliorations
+
+Le code actuel peut être significativement optimisé. Voici les pistes d'amélioration identifiées :
+
+- **Appels API asynchrones** :  
+  Actuellement, les appels API sont faits de manière séquentielle. Avec plus de **6000 enregistrements par heure** et environ **250 entrées par réponse**, une approche asynchrone permettrait de **réduire le temps de traitement** et **d'augmenter les performances**.
+
+- **Gestion de la pagination** :  
+  La pagination peut être prise en compte en calculant le nombre total de pages via la formule ceil(total_items / limit), en tenant compte de la limite maximale de 250 items par page imposée par l'API. Le mécanisme d'accès aux pages suivantes n'est pas spécifié dans la documentation Swagger et nécessite une investigation supplémentaire (offset, numéro de page, ou système de curseurs).
+- **Stratégie de reprise sur échec** :
+  Implémenter un système de checkpoint granulaire par page pour reprendre le traitement exactement où il s'est arrêté en cas d'échec, évitant ainsi le retraitement complet des données déjà récupérées.
+
+- **Création d’un Dockerfile** :  
+   Pour faciliter le **déploiement** et l’**exécution reproductible** du job, il serait pertinent de créer un `Dockerfile` afin de déployer le cloud run jobs
