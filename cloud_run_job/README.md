@@ -4,6 +4,7 @@ Ce projet est un connecteur Python permettant de récupérer des données depuis
 
 ## 🗂 Structure du projet
 
+```
 project/
 ├── src/
 │ ├── classes/ # Interfaces vers des services externes (API, GCS), mockées pour les tests
@@ -12,6 +13,7 @@ project/
 │ └── utils/ # Fonctions utilitaires (ex: argument parser)
 ├── test/ # Dossier de tests unitaires
 └── pyproject.toml # Dépendances gérées avec uv
+```
 
 ## 📦 Services disponibles
 
