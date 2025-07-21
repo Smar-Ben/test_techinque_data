@@ -27,6 +27,10 @@ Construire un pipeline de données robuste pour ingérer, transformer et mettre 
 | **Cloud Monitoring** | Observabilité      | • Alerting sur les ressources Composer • Alerting et visualisation des coûts sur BigQuery                                                  |
 | **Secret Manager**   | Gestion des secret | • Stockage sécurisé de l'API key • Rotation automatique des secrets • Intégration native avec Cloud Run                                    |
 
+## 🏛️ Vue d'ensemble de l'architecture
+
+![image](archi_gcp_global.png)
+
 ## ⚙️ Cloud Run Jobs - Connecteurs API
 
 ### Fonctionnalités
