@@ -126,7 +126,7 @@ On va avoir les données qui pourront être exploité par notre dmt et on va tra
 Aussi il faut s'assurer de récupérer uniquement les données non traité
 
 ```sql
--- Mode d'ingestion toujours en append, on ne devra pas stocker deux fois car controléé en amont via l'api
+-- Mode d'ingestion toujours en merge avec l'id
 -- Si on a pas le contrôle alors on passe en merge avec
 CREATE TABLE ods.sales (
     id INTEGER,
@@ -215,6 +215,8 @@ customers/
 ## 🔄 Pipeline de données
 
 ### Vue d'ensemble du flux
+
+![image](archi_data_pipeline.png)
 
 ```
 API REST → Cloud Run Jobs → Cloud Storage → BigQuery (raw) → BigQuery (ods) → BigQuery (dmt) → Data Analysts
